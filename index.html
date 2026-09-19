@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="az">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GhostCBZ 👻 | Fast, In-Memory Comic Reader</title>
     <meta name="description" content="A lightweight, privacy-focused, 100% in-memory comic book reader for Linux.">
     
-    <!-- İkon -->
+    <!-- Icon -->
     <link rel="icon" type="image/png" href="ghostcbz.png">
 
     <style>
-        /* --- CSS Dəyişənləri --- */
+        /* --- CSS Variables --- */
         :root {
             --bg-color: #0f111a;
             --text-color: #e6e6e6;
@@ -20,7 +20,7 @@
             --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* --- Ümumi Stillər --- */
+        /* --- General Styles --- */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -58,7 +58,7 @@
             margin-bottom: 15px;
         }
 
-        /* --- Header / Navigasiya --- */
+        /* --- Header / Navigation --- */
         header {
             background-color: rgba(15, 17, 26, 0.95);
             padding: 20px 0;
@@ -97,7 +97,7 @@
             color: var(--accent-color);
         }
 
-        /* --- Hero Bölməsi --- */
+        /* --- Hero Section --- */
         .hero {
             padding: 150px 0 100px;
             text-align: center;
@@ -119,7 +119,7 @@
             margin: 0 auto 40px;
         }
 
-        /* --- Düymələr --- */
+        /* --- Buttons --- */
         .btn {
             display: inline-block;
             padding: 12px 30px;
@@ -148,7 +148,7 @@
             background-color: #2d3345;
         }
 
-        /* --- Skrinşot Bölməsi --- */
+        /* --- Screenshots Section --- */
         .screenshots {
             padding: 80px 0;
             text-align: center;
@@ -162,7 +162,7 @@
             border: 1px solid #2d3345;
         }
 
-        /* --- Xüsusiyyətlər Bölməsi --- */
+        /* --- Features Section --- */
         .features {
             padding: 80px 0;
             background-color: var(--card-bg);
@@ -193,7 +193,7 @@
             font-size: 1.4rem;
         }
 
-        /* --- Yükləmə Bölməsi --- */
+        /* --- Download Section --- */
         .download {
             padding: 100px 0;
             text-align: center;
@@ -247,7 +247,7 @@
             color: #808080;
         }
 
-        /* Mobil Uyğunluq */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem !important; }
             h2 { font-size: 2rem; }
@@ -279,63 +279,63 @@
         </div>
     </header>
 
-    <!-- Hero Bölməsi -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <h1>Born Elite. Born Final.</h1>
-            <p>Xəyal kimi yüngül, heç bir iz buraxmayan, tamamilə operativ yaddaşda (RAM) işləyən Linux cizgi roman oxuyucusu.</p>
+            <p>Light as a ghost, leaving no traces. A 100% in-memory (RAM) comic book reader for Linux.</p>
             <div class="hero-btns">
                 <!-- Direct Download Link to GitHub Releases -->
-                <a href="https://github.com/engineer948/GhostCBZ/releases/download/v1.0.0/GhostCBZ-x86_64.AppImage" class="btn">Portable AppImage Yüklə</a>
+                <a href="https://github.com/engineer948/GhostCBZ/releases/download/v1.0.0/GhostCBZ-x86_64.AppImage" class="btn">Download Portable AppImage</a>
                 <a href="https://github.com/engineer948/GhostCBZ" target="_blank" class="btn btn-secondary">Source Code</a>
             </div>
         </div>
     </section>
 
-    <!-- Skrinşot -->
+    <!-- Screenshot -->
     <section class="screenshots container">
-        <img src="screenshot.png" alt="GhostCBZ Tətbiq Skrinşotu" class="main-screenshot">
+        <img src="screenshot.png" alt="GhostCBZ App Screenshot" class="main-screenshot">
     </section>
 
-    <!-- Özəlliklər -->
+    <!-- Features -->
     <section id="features" class="features">
         <div class="container">
-            <h2 style="text-align: center;">Mühəndislik Fəlsəfəmiz</h2>
+            <h2 style="text-align: center;">Our Engineering Philosophy</h2>
             <div class="feature-grid">
                 <div class="feature-card">
                     <h3>👻 100% In-Memory</h3>
-                    <p>Arxivləri diskin təmiz qovluğuna çıxarmır. Hər şey RAM-da baş verir, SSD-ni qoruyur.</p>
+                    <p>Never extracts archives to temporary disk folders. Everything happens in RAM, saving your SSD lifespan.</p>
                 </div>
                 <div class="feature-card">
                     <h3>⚡ Blazingly Fast</h3>
-                    <p>Disk oxuma/yazma gecikməsi yoxdur. Səhifələr anında çevrilir.</p>
+                    <p>Zero disk read/write latency. Pages load and turn instantaneously.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Incognito Mode</h3>
-                    <p>Keçmiş düyməsini söndürən kimi <code>reader_history.json</code> həm RAM-dan, həm də diskdən silinir.</p>
+                    <h3>🕵️ Incognito Mode</h3>
+                    <p>Toggling the history switch instantly purges <code>reader_history.json</code> from both RAM and physical storage.</p>
                 </div>
                 <div class="feature-card">
                     <h3>🛠️ Zero Traces</h3>
-                    <p>Tətbiqi bağlayanda sisteminizdə heç bir müvəqqəti fayl qalmaz.</p>
+                    <p>Leaves absolutely zero temporary files, cache, or residual data on your system when closed.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Yükləmə və Build -->
+    <!-- Download and Build -->
     <section id="download" class="download container">
-        <h2>Tətbiqi Əldə Et</h2>
+        <h2>Get GhostCBZ</h2>
         
         <div class="release-box">
             <div class="release-title">v1.0.0: The "Ghosting" Release 👻</div>
             <p style="color: #b0b0b0; margin-bottom: 20px;">Welcome to the first and last release. We engineered it flawlessly, left zero traces, and now we are officially <b>ghosting</b> you.</p>
             <!-- Direct Download Link -->
-            <a href="https://github.com/engineer948/GhostCBZ/releases/download/v1.0.0/GhostCBZ-x86_64.AppImage" class="btn">GhostCBZ-x86_64.AppImage Yüklə</a>
+            <a href="https://github.com/engineer948/GhostCBZ/releases/download/v1.0.0/GhostCBZ-x86_64.AppImage" class="btn">Download GhostCBZ-x86_64.AppImage</a>
         </div>
 
         <div class="build-instructions release-box">
-            <h3>Fedora/RHEL-də özün build et</h3>
-            <p style="margin: 10px 0;">Terminalda bu komandaları işlət:</p>
+            <h3>Build it yourself on Fedora / RHEL</h3>
+            <p style="margin: 10px 0;">Run these commands in your terminal:</p>
             <pre><code># 1. Prepare directory
 mkdir -p GhostCBZ.AppDir/usr/bin
 cp ghostcbz.py GhostCBZ.AppDir/usr/bin/
@@ -359,7 +359,7 @@ ARCH=x86_64 ./appimagetool-x86_64.AppImage GhostCBZ.AppDir GhostCBZ-x86_64.AppIm
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>GhostCBZ is open-source, licensed under MIT.</p>
+            <p>GhostCBZ is open-source, licensed under the MIT License.</p>
             <p>You see it. You read it. It's gone.</p>
         </div>
     </footer>
