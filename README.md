@@ -35,6 +35,9 @@ Traditional comic readers extract archive files into the operating system's temp
 
 ---
 
+## Virus Scan https://www.virustotal.com/gui/file/15e3571f2b9c56d5c31c43b7c386249b3c75a5b906789d503831488097f34a02/detection
+---
+
 ## 🎮 Shortcuts & Controls
 
 | Action | Shortcut / Mouse Gesture |
