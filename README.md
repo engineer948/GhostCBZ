@@ -51,11 +51,36 @@ Traditional comic readers extract archive files into the operating system's temp
 
 ---
 
-## 🚀 How to Run the Pre-Built AppImage
+## 📦 How to Build the AppImage (Fedora / RHEL)
 
-If you downloaded the pre-compiled standalone binary from Releases:
+Run the following commands to package GhostCBZ into a standalone `.AppImage` binary:
 
-1. Download `GhostCBZ-x86_64.AppImage` from the **Releases** tab.
-2. Grant executable permission:
-   ```bash
-   chmod +x GhostCBZ-x86_64.AppImage
+```bash
+# 1. Prepare directory and files
+mkdir -p GhostCBZ.AppDir/usr/bin
+cp ghostcbz.py GhostCBZ.AppDir/usr/bin/
+cp path/to/your_icon.png GhostCBZ.AppDir/ghostcbz.png
+
+# 2. Create Desktop Entry
+cat << 'EOF' > GhostCBZ.AppDir/ghostcbz.desktop
+[Desktop Entry]
+Name=GhostCBZ
+Exec=AppRun
+Icon=ghostcbz
+Type=Application
+Categories=Graphics;Viewer;
+EOF
+
+# 3. Create Launcher Script
+cat << 'EOF' > GhostCBZ.AppDir/AppRun
+#!/bin/sh
+SELF=$(readlink -f "$0")
+HERE=${SELF%/*}
+exec python3 "$HERE/usr/bin/ghostcbz.py" "$@"
+EOF
+chmod +x GhostCBZ.AppDir/AppRun
+
+# 4. Build the AppImage
+curl -L -O [https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage](https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage)
+chmod +x appimagetool-x86_64.AppImage
+ARCH=x86_64 ./appimagetool-x86_64.AppImage GhostCBZ.AppDir GhostCBZ-x86_64.AppImage
