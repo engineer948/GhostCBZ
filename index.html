@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GhostCBZ 👻 | Fast, In-Memory Comic Reader</title>
+    <meta name="description" content="A lightweight, privacy-focused, 100% in-memory comic book reader for Linux.">
+    
+    <!-- İkon -->
+    <link rel="icon" type="image/png" href="ghostcbz.png">
+
+    <style>
+        /* --- CSS Dəyişənləri --- */
+        :root {
+            --bg-color: #0f111a;
+            --text-color: #e6e6e6;
+            --accent-color: #00d2ff;
+            --card-bg: #1a1d29;
+            --code-bg: #2d3345;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* --- Ümumi Stillər --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+        }
+
+        /* --- Header / Navigasiya --- */
+        header {
+            background-color: rgba(15, 17, 26, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #2d3345;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .logo img {
+            height: 35px;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- Hero Bölməsi --- */
+        .hero {
+            padding: 150px 0 100px;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1d29 0%, var(--bg-color) 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* --- Düymələr --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: #000;
+            font-weight: bold;
+            border-radius: 5px;
+            font-size: 1rem;
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-color);
+            border-color: #2d3345;
+            margin-left: 10px;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-color);
+            background-color: #2d3345;
+        }
+
+        /* --- Skrinşot Bölməsi --- */
+        .screenshots {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .main-screenshot {
+            width: 100%;
+            max-width: 900px;
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid #2d3345;
+        }
+
+        /* --- Xüsusiyyətlər Bölməsi --- */
+        .features {
+            padding: 80px 0;
+            background-color: var(--card-bg);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-color);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #2d3345;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: var(--accent-color);
+            font-size: 1.4rem;
+        }
+
+        /* --- Yükləmə Bölməsi --- */
+        .download {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .release-box {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid #2d3345;
+            max-width: 700px;
+            margin: 40px auto;
+        }
+
+        .release-title {
+            font-size: 1.5rem;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            margin-bottom: 20px;
+        }
+
+        .build-instructions {
+            text-align: left;
+            margin-top: 40px;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #ff79c6;
+        }
+
+        pre code {
+            display: block;
+            padding: 15px;
+            overflow-x: auto;
+            border-radius: 5px;
+            border: 1px solid #2d3345;
+            margin: 10px 0;
+            color: var(--text-color);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #2d3345;
+            font-size: 0.9rem;
+            color: #808080;
+        }
+
+        /* Mobil Uyğunluq */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem !important; }
+            h2 { font-size: 2rem; }
+            .hero { padding: 120px 0 60px; }
+            .hero p { font-size: 1rem; }
+            .nav-links { display: none; }
+            .btn { width: 100%; margin-bottom: 10px; margin-left: 0; }
+            .btn-secondary { margin-left: 0; }
+            .release-box { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Nav -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <img src="ghostcbz.png" alt="GhostCBZ Logo">
+                    GhostCBZ
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#download">Download</a></li>
+                    <li><a href="https://github.com/engineer948/GhostCBZ" target="_blank">GitHub</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Bölməsi -->
+    <section class="hero">
+        <div class="container">
+            <h1>Born Elite. Born Final.</h1>
+            <p>Xəyal kimi yüngül, heç bir iz buraxmayan, tamamilə operativ yaddaşda (RAM) işləyən Linux cizgi roman oxuyucusu.</p>
+            <div class="hero-btns">
+                <!-- Direct Download Link to GitHub Releases -->
+                <a href="https://github.com/engineer948/GhostCBZ/releases/download/v1.0.0/GhostCBZ-x86_64.AppImage" class="btn">Portable AppImage Yüklə</a>
+                <a href="https://github.com/engineer948/GhostCBZ" target="_blank" class="btn btn-secondary">Source Code</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skrinşot -->
+    <section class="screenshots container">
+        <img src="screenshot.png" alt="GhostCBZ Tətbiq Skrinşotu" class="main-screenshot">
+    </section>
+
+    <!-- Özəlliklər -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 style="text-align: center;">Mühəndislik Fəlsəfəmiz</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>👻 100% In-Memory</h3>
+                    <p>Arxivləri diskin təmiz qovluğuna çıxarmır. Hər şey RAM-da baş verir, SSD-ni qoruyur.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ Blazingly Fast</h3>
+                    <p>Disk oxuma/yazma gecikməsi yoxdur. Səhifələr anında çevrilir.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Incognito Mode</h3>
+                    <p>Keçmiş düyməsini söndürən kimi <code>reader_history.json</code> həm RAM-dan, həm də diskdən silinir.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🛠️ Zero Traces</h3>
+                    <p>Tətbiqi bağlayanda sisteminizdə heç bir müvəqqəti fayl qalmaz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Yükləmə və Build -->
+    <section id="download" class="download container">
+        <h2>Tətbiqi Əldə Et</h2>
+        
+        <div class="release-box">
+            <div class="release-title">v1.0.0: The "Ghosting" Release 👻</div>
+            <p style="color: #b0b0b0; margin-bottom: 20px;">Welcome to the first and last release. We engineered it flawlessly, left zero traces, and now we are officially <b>ghosting</b> you.</p>
+            <!-- Direct Download Link -->
+            <a href="https://github.com/engineer948/GhostCBZ/releases/download/v1.0.0/GhostCBZ-x86_64.AppImage" class="btn">GhostCBZ-x86_64.AppImage Yüklə</a>
+        </div>
+
+        <div class="build-instructions release-box">
+            <h3>Fedora/RHEL-də özün build et</h3>
+            <p style="margin: 10px 0;">Terminalda bu komandaları işlət:</p>
+            <pre><code># 1. Prepare directory
+mkdir -p GhostCBZ.AppDir/usr/bin
+cp ghostcbz.py GhostCBZ.AppDir/usr/bin/
+# (Put your ghostcbz.png icon inside GhostCBZ.AppDir)
+
+# 2. Create Launcher
+cat << 'EOF' > GhostCBZ.AppDir/AppRun
+#!/bin/sh
+HERE=$(dirname "$(readlink -f "${0}")")
+exec python3 "$HERE/usr/bin/ghostcbz.py" "$@"
+EOF
+chmod +x GhostCBZ.AppDir/AppRun
+
+# 3. Build Portable AppImage
+curl -L -O https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
+chmod +x appimagetool-x86_64.AppImage
+ARCH=x86_64 ./appimagetool-x86_64.AppImage GhostCBZ.AppDir GhostCBZ-x86_64.AppImage</code></pre>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>GhostCBZ is open-source, licensed under MIT.</p>
+            <p>You see it. You read it. It's gone.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
