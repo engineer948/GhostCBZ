@@ -81,6 +81,6 @@ EOF
 chmod +x GhostCBZ.AppDir/AppRun
 
 # 4. Build the AppImage
-curl -L -O [https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage](https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage)
+curl -L -O https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
 chmod +x appimagetool-x86_64.AppImage
 ARCH=x86_64 ./appimagetool-x86_64.AppImage GhostCBZ.AppDir GhostCBZ-x86_64.AppImage
